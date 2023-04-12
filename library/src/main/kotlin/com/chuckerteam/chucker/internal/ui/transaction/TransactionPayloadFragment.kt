@@ -21,6 +21,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.chuckerteam.chucker.R
+import com.chuckerteam.chucker.api.Chucker
 import com.chuckerteam.chucker.databinding.ChuckerFragmentTransactionPayloadBinding
 import com.chuckerteam.chucker.internal.data.entity.HttpTransaction
 import com.chuckerteam.chucker.internal.support.Logger
@@ -101,7 +102,7 @@ internal class TransactionPayloadFragment :
             Observer { (transaction, formatRequestBody) ->
                 if (transaction == null) return@Observer
                 lifecycleScope.launch {
-                    payloadBinding.loadingProgress.visibility = View.VISIBLE
+                    Chucker._loadingSpinnerFlow.value = true
 
                     val result = processPayload(payloadType, transaction, formatRequestBody)
                     if (result.isEmpty()) {
@@ -113,7 +114,7 @@ internal class TransactionPayloadFragment :
                     // Invalidating menu, because we need to hide menu items for empty payloads
                     requireActivity().invalidateOptionsMenu()
 
-                    payloadBinding.loadingProgress.visibility = View.GONE
+                    Chucker._loadingSpinnerFlow.value = false
                 }
             }
         )
