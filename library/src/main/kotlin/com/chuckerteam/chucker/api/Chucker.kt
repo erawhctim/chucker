@@ -41,6 +41,7 @@ public object Chucker {
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
 
+    @Suppress("ObjectPropertyNaming")
     internal val _loadingSpinnerFlow = MutableStateFlow(false)
     public val loadingSpinnerVisibility: StateFlow<Boolean> = _loadingSpinnerFlow.asStateFlow()
 
