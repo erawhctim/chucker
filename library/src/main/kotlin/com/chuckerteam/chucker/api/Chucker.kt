@@ -12,6 +12,9 @@ import com.chuckerteam.chucker.R
 import com.chuckerteam.chucker.internal.support.Logger
 import com.chuckerteam.chucker.internal.support.NotificationHelper
 import com.chuckerteam.chucker.internal.ui.MainActivity
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 /**
  * Chucker methods and utilities to interact with the library.
@@ -37,6 +40,9 @@ public object Chucker {
         return Intent(context, MainActivity::class.java)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
+
+    internal val _loadingSpinnerFlow = MutableStateFlow(false)
+    public val loadingSpinnerVisibility: StateFlow<Boolean> = _loadingSpinnerFlow.asStateFlow()
 
     /**
      * Create a shortcut to launch Chucker UI.
